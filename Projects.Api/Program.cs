@@ -1,11 +1,32 @@
+using Microsoft.AspNetCore.Identity;
+using Project.Application;
+using Project.Infrastructiure;
+using Project.Infrastructure.DataContext;
+using Project.Infrastructure.Identity;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+            
+
+
+
+// Include Application Dependency
+builder.Services.AddApplication();
+// Include Infrastructur Dependency
+builder.Services.AddInfrastructure(builder.Configuration);
+
+
 
 var app = builder.Build();
 

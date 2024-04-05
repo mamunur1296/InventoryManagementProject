@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using Project.Application.CustomerFeatures.Commands;
+using Project.Application.Features.CustomerFeatures.Commands;
 using Project.Domain.Abstractions;
 
-namespace Project.Application.CustomerFeatures.Handlers.CommandHandlers
+namespace Project.Application.Features.CustomerFeatures.Handlers.CommandHandlers
 {
     internal class DeleteCustomerHandler : IRequestHandler<DeleteCustomerCommand, string>
     {

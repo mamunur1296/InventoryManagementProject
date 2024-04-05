@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Project.Application.DTOs;
 
-namespace Project.Application.CustomerFeatures.Queries
+namespace Project.Application.Features.CustomerFeatures.Queries
 {
     public class GetCustomerByEmailQuery : IRequest<CustomerDTO>
     {
@@ -10,6 +10,6 @@ namespace Project.Application.CustomerFeatures.Queries
             Email = email;
         }
 
-        public string ? Email { get; private set; }
+        public string? Email { get; private set; }
     }
 }

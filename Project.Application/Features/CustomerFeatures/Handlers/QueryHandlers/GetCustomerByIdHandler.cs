@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Project.Application.CustomerFeatures.Queries;
 using Project.Application.DTOs;
+using Project.Application.Features.CustomerFeatures.Queries;
 using Project.Domain.Abstractions;
 
-namespace Project.Application.CustomerFeatures.Handlers.QueryHandlers
+namespace Project.Application.Features.CustomerFeatures.Handlers.QueryHandlers
 {
     public class GetCustomerByIdHandler : IRequestHandler<GetCustomerByIdQuery, CustomerDTO>
     {

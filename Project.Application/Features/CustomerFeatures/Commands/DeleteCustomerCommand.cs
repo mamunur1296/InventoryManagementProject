@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Project.Application.CustomerFeatures.Commands
+namespace Project.Application.Features.CustomerFeatures.Commands
 {
     public class DeleteCustomerCommand : IRequest<string>
     {

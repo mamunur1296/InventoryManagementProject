@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using Project.Application.CustomerFeatures.Commands;
-using Project.Application.Models;
+using Project.Application.Features.CustomerFeatures.Commands;
 using Project.Domain.Abstractions;
 
-namespace Project.Application.CustomerFeatures.Handlers.CommandHandlers
+namespace Project.Application.Features.CustomerFeatures.Handlers.CommandHandlers
 {
-    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, CustomerModel>
+    public class UpdateCustomerHandler : IRequestHandler<UpdateCustomerCommand, string>
     {
         private readonly IUnitOfWorkDb _unitOfWorkDb;
         private readonly IMapper _mapper;
@@ -16,7 +15,7 @@ namespace Project.Application.CustomerFeatures.Handlers.CommandHandlers
             _mapper = mapper;
         }
 
-        public async Task<CustomerModel> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var data = await _unitOfWorkDb.customerQueryRepository.GetByIdAsync(request.Id);
             if (data == null) return default;
@@ -30,8 +29,7 @@ namespace Project.Application.CustomerFeatures.Handlers.CommandHandlers
             }
             await _unitOfWorkDb.customerCommandRepository.UpdateAsync(data);
             await _unitOfWorkDb.SaveAsync();
-            var customerRes = _mapper.Map<CustomerModel>(data);
-            return customerRes;
+            return "customerRes";
         }
     }
 }
