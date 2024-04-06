@@ -38,6 +38,7 @@ namespace Project.Infrastructiure
             });
             services.AddScoped<IUnitOfWorkDb, UnitOfWorkDb>();
             services.AddScoped<IIdentityService, IdentityService>();
+            services.AddScoped<ICustomerService, CustomerService>();
             return services;
         }
     }

@@ -20,8 +20,8 @@ builder.Services.AddSwaggerGen();
 
 // For authentication
 var _key = builder.Configuration["Jwt:Key"];
-var _issuer = builder.Configuration["Jwt:Issuer"];
-var _audience = builder.Configuration["Jwt:Audience"];
+var _issuer = builder.Configuration["Jwt:ValidIssuer"];
+var _audience = builder.Configuration["Jwt:ValidAudiance"];
 var _expirtyMinutes = builder.Configuration["Jwt:ExpiryMinutes"];
 
 

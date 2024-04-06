@@ -1,22 +1,27 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Project.Application.Interfaces;
+
 
 namespace Project.Application.Features.UserFeatures.Commands
 {
-    public class AssignUsersRoleCommand : IRequest<string>
+    public class AssignUsersRoleCommand : IRequest<int>
     {
         public string UserName { get; set; }
-        public List<string> Roles { get; set; }
+        public IList<string> Roles { get; set; }
     }
-    public class AssignUsersRoleCommandHandler : IRequestHandler<AssignUsersRoleCommand, string>
+
+    public class AssignUsersRoleCommandHandler : IRequestHandler<AssignUsersRoleCommand, int>
     {
-        public Task<string> Handle(AssignUsersRoleCommand request, CancellationToken cancellationToken)
+        private readonly IIdentityService _identityService;
+
+        public AssignUsersRoleCommandHandler(IIdentityService identityService)
         {
-            throw new NotImplementedException();
+            _identityService = identityService;
+        }
+        public async Task<int> Handle(AssignUsersRoleCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _identityService.AssignUserToRole(request.UserName, request.Roles);
+            return result ? 1 : 0;
         }
     }
 }
