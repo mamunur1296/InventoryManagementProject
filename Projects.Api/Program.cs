@@ -56,7 +56,17 @@ builder.Services.AddAuthentication(x =>
 // Dependency injection with key
 builder.Services.AddSingleton<ITokenGenerator>(new TokenGenerator(_key, _issuer, _audience, _expirtyMinutes));
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader() // Allow any header
+            .AllowCredentials();
+    });
+});
 // Include Application Dependency
 builder.Services.AddApplication();
 // Include Infrastructur Dependency
