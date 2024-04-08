@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Project.Application.CustomerFeatures.Commands;
-using Project.Application.CustomerFeatures.Queries;
+using Project.Application.Features.CustomerFeatures.Commands;
+using Project.Application.Features.CustomerFeatures.Queries;
+
 
 namespace Projects.Api.Controllers
 {
