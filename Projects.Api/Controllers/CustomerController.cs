@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Project.Application.Features.CustomerFeatures.Commands;
 using Project.Application.Features.CustomerFeatures.Queries;
@@ -6,8 +7,10 @@ using Project.Application.Features.CustomerFeatures.Queries;
 
 namespace Projects.Api.Controllers
 {
+    [Authorize(Roles = "User")]
     [Route("api/[controller]")]
     [ApiController]
+    
     public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,6 +24,7 @@ namespace Projects.Api.Controllers
         {
             return Ok(await _mediator.Send(commend));
         }
+        
         [HttpGet("getAllCustomer")]
         public async Task<IActionResult> getAllCustomer()
         {
