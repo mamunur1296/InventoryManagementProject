@@ -8,6 +8,7 @@ using Project.Infrastructiure;
 using Project.Infrastructure.DataContext;
 using Project.Infrastructure.Identity;
 using Project.Infrastructure.Services;
+using Projects.Api.Middlewares;
 using System.Text;
 
 
@@ -99,6 +100,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -111,6 +115,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpsRedirection();
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 app.MapControllers();
 
 app.Run();

@@ -7,7 +7,7 @@ using Project.Application.Features.CustomerFeatures.Queries;
 
 namespace Projects.Api.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     

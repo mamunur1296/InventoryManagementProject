@@ -49,7 +49,7 @@ namespace Project.Infrastructure.Services
             var customer = await _unitOfWorkDb.customerQueryRepository.GetByIdAsync(id);
             if (customer == null)
             {
-                throw new NotFoundException("User not found");
+                throw new NotFoundException($"Customer id = {id} Not Found !");
                 //throw new Exception("User not found");
             }
             var result =  _unitOfWorkDb.customerCommandRepository.DeleteAsync(customer);
@@ -60,7 +60,6 @@ namespace Project.Infrastructure.Services
         public async Task<IEnumerable<(Guid id, string fullName, string contactNumber, string email, string address)>> GetAllCustomerAsync()
         {
             var customers = await _unitOfWorkDb.customerQueryRepository.GetAllAsync();
-
             return customers.Select(c => (c.Id, $"{c.FirstName} {c.LastName}", c.ContactNumber, c.Email, c.Address)).ToList();
         }
 
@@ -70,7 +69,7 @@ namespace Project.Infrastructure.Services
 
             if (customer == null)
             {
-                throw new NotFoundException("Customer not found");
+                throw new NotFoundException($"Customer Email = {email} Not Found !");
             }
 
             return (customer.FirstName, customer.LastName, customer.ContactNumber, customer.Email, customer.Address, customer.Id);
@@ -82,7 +81,7 @@ namespace Project.Infrastructure.Services
 
             if (customer == null)
             {
-                throw new NotFoundException("Customer not found");
+                throw new NotFoundException($"Customer id = {id} Not Found !");
             }
 
             return (customer.FirstName, customer.LastName, customer.ContactNumber,customer.Email, customer.Address, customer.Id);
@@ -95,7 +94,7 @@ namespace Project.Infrastructure.Services
             var customer = await _unitOfWorkDb.customerQueryRepository.GetByIdAsync(id);
             if (customer == null)
             {
-                throw new NotFoundException($"Customer Not Found {id}");
+                throw new NotFoundException($"Customer id = {id} Not Found !");
             }
             customer.FirstName = firstName;
             customer.LastName = lastName;

@@ -27,18 +27,27 @@ namespace Project.Application.Features.CustomerFeatures.Queries
 
         public async Task<CustomerDTO> Handle(GetCustomerByEmailQuery request, CancellationToken cancellationToken)
         {
-            var Customer = await _customerService.GetCustomerByEmailAsync(request.Email);
-            var customerDetails = new CustomerDTO()
-            {
-                Address = Customer.address,
-                ContactNumber = Customer.contactNumber,
-                Id = Customer.id,
-                FirstName = Customer.firstName,
-                LastName = Customer.lastName,
-                Email = Customer.email,
 
-            };
-            return customerDetails;
+            try
+            {
+                var Customer = await _customerService.GetCustomerByEmailAsync(request.Email);
+                var customerDetails = new CustomerDTO()
+                {
+                    Address = Customer.address,
+                    ContactNumber = Customer.contactNumber,
+                    Id = Customer.id,
+                    FirstName = Customer.firstName,
+                    LastName = Customer.lastName,
+                    Email = Customer.email,
+
+                };
+                return customerDetails;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -20,16 +20,25 @@ namespace Project.Application.Features.CustomerFeatures.Queries
 
         public async Task<IEnumerable<CustomerDTO>> Handle(GetAllCustomerQuery request, CancellationToken cancellationToken)
         {
-            var customer = await _customerService.GetAllCustomerAsync();
-            var data = customer.Select(x => new CustomerDTO{
-                Id= x.id,
-                Address= x.address,
-                ContactNumber= x.contactNumber,
-                Email=x.email,
-                FirstName=x.fullName,
-                LastName=x.fullName,
-            }).ToList();
-            return data;
+            try
+            {
+                var customerList = await _customerService.GetAllCustomerAsync();
+                var customer = customerList.Select(x => new CustomerDTO
+                {
+                    Id = x.id,
+                    Address = x.address,
+                    ContactNumber = x.contactNumber,
+                    Email = x.email,
+                    FirstName = x.fullName,
+                    LastName = x.fullName,
+                }).ToList();
+                return customer;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 
